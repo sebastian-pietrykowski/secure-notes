@@ -1,4 +1,4 @@
-export class NoteResource {
+export class CreateNoteRequest {
   constructor(
     public readonly id: string,
     public readonly title: string,
