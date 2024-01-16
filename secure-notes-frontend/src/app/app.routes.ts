@@ -10,7 +10,9 @@ export const routes: Routes = [
   {
     path: 'notes',
     loadComponent: () =>
-      import('./features/note/note.component').then((c) => c.NoteComponent),
+      import('./features/note/note-list/note-list.component').then(
+        (c) => c.NoteListComponent,
+      ),
   },
   // { path: '**', redirectTo: '' },
 ];
