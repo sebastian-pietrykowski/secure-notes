@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { CreateNoteRequest } from '../models/create-note-request';
 import { Observable } from 'rxjs';
 import { NoteResource } from '../models/note-resource';
-import { UpdateNoteRequest } from '../models/update-note-request';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -24,11 +23,6 @@ export class NoteService {
 
   public getNotes(): Observable<NoteResource[]> {
     return this.httpClient.get<NoteResource[]>(this.notesUrl);
-  }
-
-  public updateNote(note: UpdateNoteRequest): Observable<void> {
-    const url = `${this.notesUrl}/${note.id}`;
-    return this.httpClient.put<void>(url, note);
   }
 
   public deleteNote(id: string): Observable<void> {
