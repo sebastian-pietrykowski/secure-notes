@@ -1,0 +1,70 @@
+<div class="create-note">
+  <mat-card class="create-note__card">
+    <mat-card-header class="create-note__header">
+      <mat-card-title class="create-note__title">Create note</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="noteForm" (ngSubmit)="createNote()">
+      <mat-card-content>
+        <mat-form-field class="create-note__form-field">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            [formControl]="titleFormControl"
+            [errorStateMatcher]="errorMatcher"
+          />
+          @if (titleFormControl.hasError("required")) {
+            <mat-error>Title is required</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="create-note__form-field">
+          <mat-label>Content</mat-label>
+          <textarea
+            matInput
+            [formControl]="contentFormControl"
+            [errorStateMatcher]="errorMatcher"
+            rows="10"
+          ></textarea>
+          @if (contentFormControl.hasError("required")) {
+            <mat-error>Content is required</mat-error>
+          }
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="create-note__actions">
+        <button
+          mat-flat-button
+          color="accent"
+          type="submit"
+          [disabled]="noteForm.invalid"
+        >
+          CREATE
+        </button>
+      </mat-card-actions>
+    </form>
+    <mat-card-content>
+      <p>Content text styling methods:</p>
+      <ul>
+        @for (textFormatting of textFormattingArray; track textFormatting.tag) {
+          <li>
+            <span>
+              {{ getTextFormattingText(textFormatting) }}
+            </span>
+            <span class="create-note__help-divider"></span>
+            <span
+              [innerHTML]="getTextFormattingText(textFormatting) | sanitizeHTML"
+            ></span>
+          </li>
+        }
+        <li>
+          <span>{{ imageFormula }}</span>
+          <span class="create-note__help-divider"></span>
+          <span [innerHTML]="imageExample | sanitizeHTML"></span>
+        </li>
+        <li>
+          <span>{{ linkFormula }}</span>
+          <span class="create-note__help-divider"></span>
+          <span [innerHTML]="linkExample | sanitizeHTML"></span>
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>

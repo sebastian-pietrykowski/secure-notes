@@ -1,11 +1,11 @@
-import { Component, Sanitizer, SecurityContext } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component } from '@angular/core';
 import { NoteResource } from '../../../core/models/note-resource';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { SanitizeTextStylePipe } from '../../../core/pipes/sanitize-text-style.pipe';
+import { SanitizeHTMLPipe } from '../../../core/pipes/sanitize-html.pipe';
 import { MatIconModule } from '@angular/material/icon';
-import {MatDivider} from "@angular/material/divider";
+import { Router } from '@angular/router';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-note-list',
@@ -14,13 +14,13 @@ import {MatDivider} from "@angular/material/divider";
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    SanitizeTextStylePipe,
+    MatDividerModule,
+    SanitizeHTMLPipe,
   ],
   templateUrl: './note-list.component.html',
   styleUrl: './note-list.component.scss',
 })
 export class NoteListComponent {
-  boldText = 'asa<b>ba</b>';
   notes = [
     new NoteResource('uuid1', 'My note 1', 'My content<b> 1 </b>', 'user1'),
     new NoteResource('uuid2', 'My note 2', 'My <b> content 2 </b>', 'user1'),
@@ -31,8 +31,10 @@ export class NoteListComponent {
     new NoteResource('uuid2', 'My note 2', 'My content 2', 'user1'),
   ];
 
-  protected addNote() {
-    console.log('add note');
+  constructor(private readonly router: Router) {}
+
+  protected createNote() {
+    this.router.navigateByUrl('/notes/create').then();
   }
 
   protected deleteNote(id: string) {

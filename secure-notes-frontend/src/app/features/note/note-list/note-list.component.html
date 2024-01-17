@@ -2,7 +2,7 @@
   <header class="note-list__header-container">
     <h1 class="note-list__header">Notes</h1>
   </header>
-  <button mat-fab color="accent" aria-label="Add note" (click)="addNote()">
+  <button mat-fab color="accent" aria-label="Add note" (click)="createNote()">
     <mat-icon>add</mat-icon>
   </button>
   <div class="note-list__cards">
@@ -13,7 +13,8 @@
           <mat-card-subtitle>Created by: {{ note.creator }} </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <p [innerHTML]="note.content | sanitizeTextStyle" class="note-list__content-text"></p>
+          <p [innerHTML]="note.content | sanitizeHTML" class="note-list__content-text"></p>
+          <mat-divider></mat-divider>
         </mat-card-content>
         <mat-card-actions class="note-list__actions">
           <button mat-stroked-button color="warn" (click)="deleteNote(note.id)">

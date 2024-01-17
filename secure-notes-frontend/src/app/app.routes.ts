@@ -14,5 +14,12 @@ export const routes: Routes = [
         (c) => c.NoteListComponent,
       ),
   },
+  {
+    path: 'notes/create',
+    loadComponent: () =>
+      import('./features/note/create-note/create-note.component').then(
+        (c) => c.CreateNoteComponent,
+      ),
+  },
   // { path: '**', redirectTo: '' },
 ];

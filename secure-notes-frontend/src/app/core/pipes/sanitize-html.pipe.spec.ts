@@ -1,8 +1,8 @@
-import { SanitizeTextStylePipe } from './sanitize-text-style.pipe';
+import { SanitizeHTMLPipe } from './sanitize-html.pipe';
 
 describe('SanitizeTextStylePipe', () => {
   it('create an instance', () => {
-    const pipe = new SanitizeTextStylePipe();
+    const pipe = new SanitizeHTMLPipe();
     expect(pipe).toBeTruthy();
   });
 });

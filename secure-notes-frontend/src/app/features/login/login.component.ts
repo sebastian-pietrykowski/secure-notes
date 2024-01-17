@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import {Form, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  Form,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {NgIf} from "@angular/common";
-import {ErrorStateMatcher} from "@angular/material/core";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NgIf } from '@angular/common';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +32,7 @@ import {ErrorStateMatcher} from "@angular/material/core";
 export class LoginComponent implements OnInit {
   protected loginForm!: FormGroup;
   protected errorMatcher = new ErrorStateMatcher();
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
@@ -38,6 +46,14 @@ export class LoginComponent implements OnInit {
     this.redirectAfterLogin();
   }
 
+  protected get usernameFormControl(): FormControl {
+    return this.loginForm!.get('username') as FormControl;
+  }
+
+  protected get passwordFormControl(): FormControl {
+    return this.loginForm!.get('password') as FormControl;
+  }
+
   private createLoginForm(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -47,13 +63,5 @@ export class LoginComponent implements OnInit {
 
   private redirectAfterLogin(): void {
     this.router.navigateByUrl('/notes').then();
-  }
-
-  protected get usernameFormControl(): FormControl {
-    return this.loginForm!.get('username') as FormControl;
-  }
-
-  protected get passwordFormControl(): FormControl {
-    return this.loginForm!.get('password') as FormControl;
   }
 }
