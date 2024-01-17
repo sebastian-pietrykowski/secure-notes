@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { SanitizeHTMLPipe } from '../../../core/pipes/sanitize-html.pipe';
 import { TextFormatting } from '../../../core/models/text-formatting';
 import {CreateNoteRequest} from "../../../core/models/create-note-request";
+import {TextFormattingHelpComponent} from "../text-formatting-help/text-formatting-help.component";
 
 @Component({
   selector: 'app-create-note',
@@ -26,6 +27,7 @@ import {CreateNoteRequest} from "../../../core/models/create-note-request";
     MatInputModule,
     ReactiveFormsModule,
     SanitizeHTMLPipe,
+    TextFormattingHelpComponent,
   ],
   templateUrl: './create-note.component.html',
   styleUrl: './create-note.component.scss',
@@ -33,32 +35,6 @@ import {CreateNoteRequest} from "../../../core/models/create-note-request";
 export class CreateNoteComponent implements OnInit {
   protected noteForm!: FormGroup;
   protected errorMatcher = new ErrorStateMatcher();
-
-  textFormattingArray: TextFormatting[] = [
-    new TextFormatting('b', 'bold'),
-    new TextFormatting('strong', 'strong'),
-    new TextFormatting('i', 'italic'),
-    new TextFormatting('em', 'emphasized'),
-    new TextFormatting('mark', 'marked'),
-    new TextFormatting('small', 'small'),
-    new TextFormatting('del', 'deleted'),
-    new TextFormatting('ins', 'inserted'),
-    new TextFormatting('sub', 'subscript'),
-    new TextFormatting('sup', 'superscript'),
-    new TextFormatting('h1', 'header1'),
-    new TextFormatting('h2', 'header2'),
-    new TextFormatting('h3', 'header3'),
-    new TextFormatting('h4', 'header4'),
-    new TextFormatting('h5', 'header5'),
-    new TextFormatting('h6', 'header6'),
-  ];
-
-  imageFormula = `<img src=\"url\">`;
-  exampleImageUrl = 'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/star/default/24px.svg';
-  imageExample = `<img src="${this.exampleImageUrl}">`;
-  linkFormula = `<a href=\"text\">Link</a>`;
-  exampleLinkUrl = 'https://google.com';
-  linkExample = `<a href="${this.exampleLinkUrl}">Link</a>`;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -77,15 +53,11 @@ export class CreateNoteComponent implements OnInit {
     return this.noteForm!.get('content') as FormControl;
   }
 
-  protected getTextFormattingText(textFormatting: TextFormatting) {
-    return `<${textFormatting.tag}> ${textFormatting.content} </${textFormatting.tag}>`;
-  }
-
   protected createNote(): void {
     const createNoteRequest = new CreateNoteRequest(
       this.titleFormControl.value,
       this.contentFormControl.value,
-      'user'
+      'user',
     );
     console.log(createNoteRequest);
   }
