@@ -8,7 +8,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class SanitizeHTMLPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}
   transform(value: string): unknown {
-    console.log(value);
     return this.sanitizer.sanitize(SecurityContext.HTML, value);
   }
 }
