@@ -1,0 +1,36 @@
+.note-list {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__header-container {
+    text-align: center;
+  }
+
+  &__header {
+    font-size: 3rem;
+    line-height: 3rem;
+    margin: 0;
+  }
+
+  &__cards {
+    margin: auto;
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__card {
+    width: 25rem;
+  }
+
+  &__content-text {
+    margin: 1rem 0;
+  }
+
+  &__actions {
+    gap: 1rem;
+  }
+}
