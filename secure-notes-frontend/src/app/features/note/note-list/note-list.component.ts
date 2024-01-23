@@ -22,13 +22,13 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class NoteListComponent {
   notes = [
-    new NoteResource('uuid1', 'My note 1', 'My content<b> 1 </b>', 'user1'),
-    new NoteResource('uuid2', 'My note 2', 'My <b> content 2 </b>', 'user1'),
-    new NoteResource('uuid2', 'My note 2', '<i>My</i> content 2', 'user1'),
-    new NoteResource('uuid2', 'My note 2', 'My content 2', 'user1'),
-    new NoteResource('uuid2', 'My note 2', 'My content 2', 'user1'),
-    new NoteResource('uuid2', 'My note 2', 'My content 2', 'user1'),
-    new NoteResource('uuid2', 'My note 2', 'My content 2', 'user1'),
+    new NoteResource('uuid1', 'My note 1', 'My content<b> 1 </b>', 'user1', false),
+    new NoteResource('uuid2', 'My note 2', 'My <b> content 2 </b>', 'user1', false),
+    new NoteResource('uuid2', 'My note 2', '<i>My</i> content 2', 'user1', false),
+    new NoteResource('uuid2', 'My note 2', 'My content 2', 'user1', false),
+    new NoteResource('uuid2', 'My note 2', 'My content 2', 'user1', false),
+    new NoteResource('uuid2', 'My note 2', 'My content 2', 'user1', false),
+    new NoteResource('uuid2', 'My note 2', 'My content 2', 'user1', false),
   ];
 
   constructor(private readonly router: Router) {}
@@ -38,6 +38,10 @@ export class NoteListComponent {
   }
 
   protected deleteNote(id: string) {
+    console.log(`delete note ${id}`);
+  }
+
+  protected showNote(id: string) {
     console.log(`delete note ${id}`);
   }
 }

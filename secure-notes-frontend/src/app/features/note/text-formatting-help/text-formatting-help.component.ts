@@ -35,7 +35,7 @@ export class TextFormattingHelpComponent {
   exampleImageUrl =
     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/star/default/24px.svg';
   imageExample = `<img src="${this.exampleImageUrl}">`;
-  
+
   linkFormula = `<a href=\"url\">Text</a>`;
   exampleLinkUrl = 'https://google.com';
   linkExample = `<a href="${this.exampleLinkUrl}">Link</a>`;

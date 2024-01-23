@@ -11,14 +11,20 @@
         <mat-card-header>
           <mat-card-title> {{ note.title }} </mat-card-title>
           <mat-card-subtitle>Created by: {{ note.creator }} </mat-card-subtitle>
+          <mat-card-subtitle>Is encrypted: {{ note.isEncrypted }} </mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
-          <p [innerHTML]="note.content | sanitizeHTML" class="note-list__content-text"></p>
-          <mat-divider></mat-divider>
-        </mat-card-content>
+        @if(!note.isEncrypted) {
+          <mat-card-content>
+            <p [innerHTML]="note.content | sanitizeHTML" class="note-list__content-text"></p>
+            <mat-divider></mat-divider>
+          </mat-card-content>
+        }
         <mat-card-actions class="note-list__actions">
           <button mat-stroked-button color="warn" (click)="deleteNote(note.id)">
             DELETE
+          </button>
+          <button mat-stroked-button color="accent" (click)="showNote(note.id)">
+            SHOW
           </button>
         </mat-card-actions>
       </mat-card>
