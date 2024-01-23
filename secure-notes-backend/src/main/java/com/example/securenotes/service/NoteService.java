@@ -4,6 +4,7 @@ import com.example.securenotes.dto.CreateNoteRequest;
 import com.example.securenotes.dto.NoteResource;
 import com.example.securenotes.mapper.NoteMapper;
 import com.example.securenotes.repository.NoteRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,8 @@ public class NoteService {
     }
 
     public NoteResource getNoteById(UUID id) {
-        final var note = noteRepository.findById(id).orElseThrow();
+        final var note = noteRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Note with id " + id + " does not exist"));
         return noteMapper.mapNoteToNoteResource(note);
     }
 
@@ -46,7 +48,7 @@ public class NoteService {
 
     private void validateIfNoteExists(UUID id) {
         if (!noteRepository.existsById(id)) {
-            throw new RuntimeException("Note with id " + id + " does not exist");
+            throw new IllegalArgumentException("Note with id " + id + " does not exist");
         }
     }
 }

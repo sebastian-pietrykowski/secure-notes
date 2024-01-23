@@ -1,6 +1,7 @@
 package com.example.securenotes.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,18 +19,21 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotNull(message = "Title cannot be null")
     @Column(nullable = false)
     private String title;
 
+    @NotNull(message = "Content cannot be null")
     @Column(nullable = false)
     private String content;
 
+    @NotNull(message = "Creator cannot be null")
     @Column(nullable = false)
     private String creator;
 
+    @NotNull(message = "IsEncrypted cannot be null")
     @Column(nullable = false)
     private Boolean isEncrypted;
 
-    @Column(nullable = true)
     private String password;
 }
