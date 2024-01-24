@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+    private final PasswordValidatorService passwordValidatorService;
 
     @Transactional
     public void register(RegisterUserRequest registerUserRequest) {
+        validateIfEmailDoesntExist(registerUserRequest.email());
+        passwordValidatorService.validatePassword(registerUserRequest.password());
+
         final var user = userMapper.mapRegisterUserToUser(registerUserRequest);
-        validateIfEmailDoesntExist(user.getEmail());
         userRepository.save(user);
     }
 

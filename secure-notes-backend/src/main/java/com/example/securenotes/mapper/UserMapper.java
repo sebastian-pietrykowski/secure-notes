@@ -1,6 +1,5 @@
 package com.example.securenotes.mapper;
 
-import com.example.securenotes.config.PasswordConfiguration;
 import com.example.securenotes.domain.AppUser;
 import com.example.securenotes.dto.RegisterUserRequest;
 import com.example.securenotes.repository.UserRepository;

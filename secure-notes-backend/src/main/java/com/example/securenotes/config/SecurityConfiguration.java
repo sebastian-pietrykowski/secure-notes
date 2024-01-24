@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                         logout
                             .logoutUrl("/api/v1/auth/logout")
                             .logoutSuccessHandler(logoutSuccessHandler())
+                                .invalidateHttpSession(true)
                                 .deleteCookies("JSESSIONID")
                                 .permitAll()
                 )
