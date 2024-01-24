@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@CrossOrigin(origins = "*") // TODO
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/notes")
@@ -33,6 +32,7 @@ public class NoteController {
 
     @GetMapping
     ResponseEntity<List<NoteResource>> getNotes() {
+        System.out.println("getNotes");
         final var notes = noteService.getAllNotes();
         return ResponseEntity.ok(notes);
     }

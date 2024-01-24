@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
-public class PasswordConfiguration {
+public class ApplicationConfiguration {
     private final UserRepository userRepository;
 
     private static final int SALT_LENGTH = 16;
@@ -39,6 +39,7 @@ public class PasswordConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new Argon2PasswordEncoder(SALT_LENGTH, HASH_LENGTH, PARALLELISM, MEMORY, ITERATIONS);
     }
 }
