@@ -32,6 +32,7 @@ public class NoteController {
 
     @GetMapping
     ResponseEntity<List<NoteResource>> getNotes() {
+        System.out.println("getNotes");
         final var notes = noteService.getAllNotes();
         return ResponseEntity.ok(notes);
     }

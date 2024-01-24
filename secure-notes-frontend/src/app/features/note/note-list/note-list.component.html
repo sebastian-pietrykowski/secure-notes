@@ -6,7 +6,7 @@
     <mat-icon>add</mat-icon>
   </button>
   <div class="note-list__cards">
-    @for (note of notes; track note.id) {
+    @for (note of (notes$ | async); track note.id) {
       <mat-card class="note-list__card">
         <mat-card-header>
           <mat-card-title> {{ note.title }} </mat-card-title>

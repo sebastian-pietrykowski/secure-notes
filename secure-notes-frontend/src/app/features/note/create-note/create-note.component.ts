@@ -17,6 +17,7 @@ import { TextFormatting } from '../../../core/models/text-formatting';
 import {CreateNoteRequest} from "../../../core/models/create-note-request";
 import {TextFormattingHelpComponent} from "../text-formatting-help/text-formatting-help.component";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {NoteService} from "../../../core/services/note.service";
 
 @Component({
   selector: 'app-create-note',
@@ -39,6 +40,7 @@ export class CreateNoteComponent implements OnInit {
   protected errorMatcher = new ErrorStateMatcher();
 
   constructor(
+    private readonly noteService: NoteService,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
   ) {}
@@ -68,10 +70,17 @@ export class CreateNoteComponent implements OnInit {
       this.titleFormControl.value,
       this.contentFormControl.value,
       'user',
-      this.isEncryptedFormControl.value,
+      this.isEncryptedFormControl.value === '' ? false : this.isEncryptedFormControl.value,
       this.passwordFormControl.value
     );
     console.log(createNoteRequest);
+
+    const createNote$ = this.noteService.createNote(createNoteRequest);
+    createNote$.subscribe({
+      next: () => {
+        this.goToNoteList();
+      }
+    });
   }
 
   private createNoteForm(): void {
@@ -81,5 +90,9 @@ export class CreateNoteComponent implements OnInit {
       isEncrypted: [''],
       password: [''],
     });
+  }
+
+  private goToNoteList(): void {
+    this.router.navigateByUrl('/notes').then();
   }
 }

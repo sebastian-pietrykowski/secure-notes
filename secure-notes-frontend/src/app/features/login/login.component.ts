@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import {
-  Form,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -14,6 +13,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgIf } from '@angular/common';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { AuthService } from '../../core/services/auth.service';
+import { User } from '../../core/models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -34,8 +36,10 @@ export class LoginComponent implements OnInit {
   protected errorMatcher = new ErrorStateMatcher();
 
   constructor(
+    private readonly authService: AuthService,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -43,11 +47,24 @@ export class LoginComponent implements OnInit {
   }
 
   protected login(): void {
-    this.redirectAfterLogin();
+    const user = new User(
+      this.emailFormControl.value,
+      this.passwordFormControl.value,
+    );
+    const login$ = this.authService.login(user);
+    login$.subscribe({
+      next: () => {
+        this.redirectAfterLogin();
+      },
+      error: (err: Response) => {
+        // console.error(err);
+        this.showLoginFailureMessage();
+      },
+    });
   }
 
-  protected get usernameFormControl(): FormControl {
-    return this.loginForm!.get('username') as FormControl;
+  protected get emailFormControl(): FormControl {
+    return this.loginForm!.get('email') as FormControl;
   }
 
   protected get passwordFormControl(): FormControl {
@@ -56,12 +73,16 @@ export class LoginComponent implements OnInit {
 
   private createLoginForm(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
   private redirectAfterLogin(): void {
     this.router.navigateByUrl('/notes').then();
+  }
+
+  private showLoginFailureMessage() {
+    this.snackBar.open('Login failure', 'Close');
   }
 }
