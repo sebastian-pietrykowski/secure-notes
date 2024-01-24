@@ -13,7 +13,7 @@
           <mat-card-subtitle>Created by: {{ note.creator }} </mat-card-subtitle>
           <mat-card-subtitle>Is encrypted: {{ note.isEncrypted }} </mat-card-subtitle>
         </mat-card-header>
-        @if(!note.isEncrypted) {
+        @if (!note.isEncrypted) {
           <mat-card-content>
             <p [innerHTML]="note.content | sanitizeHTML" class="note-list__content-text"></p>
             <mat-divider></mat-divider>

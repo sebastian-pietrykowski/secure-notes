@@ -73,7 +73,6 @@ export class CreateNoteComponent implements OnInit {
       this.isEncryptedFormControl.value === '' ? false : this.isEncryptedFormControl.value,
       this.passwordFormControl.value
     );
-    console.log(createNoteRequest);
 
     const createNote$ = this.noteService.createNote(createNoteRequest);
     createNote$.subscribe({
