@@ -16,6 +16,13 @@ public class UserService {
     @Transactional
     public void register(RegisterUserRequest registerUserRequest) {
         final var user = userMapper.mapRegisterUserToUser(registerUserRequest);
+        validateIfEmailDoesntExist(user.getEmail());
         userRepository.save(user);
+    }
+
+    private void validateIfEmailDoesntExist(String email) {
+        if (userRepository.existsByEmail(email)) {
+            throw new IllegalArgumentException("Email already exists");
+        }
     }
 }

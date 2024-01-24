@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*") // TODO
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/auth/register1")
+@RequestMapping("api/v1/auth/register")
 public class RegisterController {
     private final UserService userService;
 
