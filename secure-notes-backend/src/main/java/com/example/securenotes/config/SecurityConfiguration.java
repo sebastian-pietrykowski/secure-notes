@@ -39,23 +39,30 @@ public class SecurityConfiguration {
                             .requestMatchers("/api/v1/auth/register").permitAll()
                             .requestMatchers(HttpMethod.POST).authenticated()
                             .anyRequest().denyAll();
-                });
+                })
+                .exceptionHandling((exceptionHandling) -> exceptionHandling
+                        .authenticationEntryPoint(
+                                (request, response, authException) ->
+                                        response.setStatus(HttpStatus.UNAUTHORIZED.value())
+                        )
+                );
         return http.build();
     }
 
     private AuthenticationSuccessHandler loginSuccessHandler() {
         return (httpServletRequest, httpServletResponse, authentication) -> {
-            httpServletResponse.setStatus(200);
+            httpServletResponse.setStatus(HttpStatus.OK.value());
         };
     }
 
     private AuthenticationFailureHandler loginFailureHandler() {
-        return (httpServletRequest, httpServletResponse, e) -> httpServletResponse.setStatus(401);
+        return (httpServletRequest, httpServletResponse, e) ->
+                httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
     }
 
     private LogoutSuccessHandler logoutSuccessHandler() {
         return (httpServletRequest, httpServletResponse, authentication) -> {
-            httpServletResponse.setStatus(200);
+            httpServletResponse.setStatus(HttpStatus.OK.value());
         };
     }
 }
