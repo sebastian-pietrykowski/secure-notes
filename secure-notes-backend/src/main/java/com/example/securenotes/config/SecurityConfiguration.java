@@ -2,6 +2,7 @@ package com.example.securenotes.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,13 +30,15 @@ public class SecurityConfiguration {
                         logout
                             .logoutUrl("/api/v1/auth/logout")
                             .logoutSuccessHandler(logoutSuccessHandler())
+                                .deleteCookies("JSESSIONID")
                                 .permitAll()
                 )
                 .authorizeHttpRequests((request) -> {
                     request
                             .requestMatchers("/api/v1/notes/**").authenticated()
-                            .requestMatchers("/api/v1/auth/register").permitAll();
-//                            .anyRequest().denyAll();
+                            .requestMatchers("/api/v1/auth/register").permitAll()
+                            .requestMatchers(HttpMethod.POST).authenticated()
+                            .anyRequest().denyAll();
                 });
         return http.build();
     }
