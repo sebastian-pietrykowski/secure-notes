@@ -1,9 +1,6 @@
 package com.example.securenotes.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,8 +21,10 @@ public class AppUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
 
+    @Column(nullable = false, unique = true)
     String email;
 
+    @Column(nullable = false)
     String password;
 
     @Override

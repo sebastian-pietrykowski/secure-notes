@@ -33,8 +33,6 @@ public class PasswordConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        String springBouncyHash = passwordEncoder().encode("qwerty");
-        System.out.println(springBouncyHash);
         return username -> userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }

@@ -1,21 +1,12 @@
 package com.example.securenotes.config;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
-import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -34,7 +25,7 @@ public class SecurityConfiguration {
                 )
                 .authorizeHttpRequests((request) -> {
                     request
-                            .requestMatchers("/api/v1/notes/**").permitAll()
+                            .requestMatchers("/api/v1/notes/**").authenticated()
                             .requestMatchers("/api/v1/auth/**").permitAll()
                             .anyRequest().denyAll();
                 });
