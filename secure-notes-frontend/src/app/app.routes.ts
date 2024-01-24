@@ -15,6 +15,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'notes/show/:id',
+    loadComponent: () =>
+      import('./features/note/show-note/show-note.component').then(
+        (c) => c.ShowNoteComponent,
+      ),
+  },
+  {
     path: 'notes/create',
     loadComponent: () =>
       import('./features/note/create-note/create-note.component').then(

@@ -31,7 +31,7 @@ public class NoteController {
         return ResponseEntity.ok(note);
     }
 
-    @GetMapping("/encrypted/{id}")
+    @PostMapping("/encrypted/{id}")
     ResponseEntity<NoteResource> getEncryptedNoteById(
             @PathVariable UUID id,
             @RequestBody EncryptedNotePassword encryptedNotePassword

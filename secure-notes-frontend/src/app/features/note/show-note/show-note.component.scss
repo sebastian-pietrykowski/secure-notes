@@ -1,0 +1,33 @@
+.show-note {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__header-container {
+    text-align: center;
+  }
+
+  &__card {
+    width: 25rem;
+    margin: auto;
+  }
+
+  &__content-text {
+    margin: 1rem 0;
+  }
+
+  &__actions {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  &__form-field {
+    width: 70%;
+  }
+
+  &__encrypt-button {
+    margin-bottom: 1rem;
+  }
+}

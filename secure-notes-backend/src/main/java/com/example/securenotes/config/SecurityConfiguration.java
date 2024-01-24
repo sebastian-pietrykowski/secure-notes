@@ -49,6 +49,7 @@ public class SecurityConfiguration {
                             .requestMatchers("/api/v1/auth/register").permitAll()
                             .requestMatchers(HttpMethod.POST).authenticated()
                             .requestMatchers(HttpMethod.GET).authenticated()
+                            .requestMatchers(HttpMethod.DELETE).authenticated()
                             .anyRequest().denyAll();
                 })
                 .exceptionHandling((exceptionHandling) -> exceptionHandling
@@ -64,8 +65,8 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:4200"));
-        configuration.setAllowedMethods(List.of("GET","POST", "DELETE"));
-        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "DELETE"));
+        configuration.setAllowedHeaders(List.of("content-type", "authorization"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

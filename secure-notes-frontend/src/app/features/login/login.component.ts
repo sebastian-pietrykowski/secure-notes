@@ -64,11 +64,11 @@ export class LoginComponent implements OnInit {
   }
 
   protected get emailFormControl(): FormControl {
-    return this.loginForm!.get('email') as FormControl;
+    return this.loginForm.get('email') as FormControl;
   }
 
   protected get passwordFormControl(): FormControl {
-    return this.loginForm!.get('password') as FormControl;
+    return this.loginForm.get('password') as FormControl;
   }
 
   private createLoginForm(): void {

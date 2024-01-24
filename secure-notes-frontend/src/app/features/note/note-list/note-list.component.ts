@@ -50,6 +50,7 @@ export class NoteListComponent {
   }
 
   protected showNote(id: string) {
-    console.log(`delete note ${id}`);
+    const url = `/notes/show/${id}`;
+    this.router.navigateByUrl(url).then();
   }
 }
