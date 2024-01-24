@@ -1,6 +1,7 @@
 package com.example.securenotes.web;
 
 import com.example.securenotes.dto.CreateNoteRequest;
+import com.example.securenotes.dto.EncryptedNotePassword;
 import com.example.securenotes.dto.NoteResource;
 import com.example.securenotes.service.NoteService;
 import jakarta.validation.Valid;
@@ -27,6 +28,15 @@ public class NoteController {
     @GetMapping("/{id}")
     ResponseEntity<NoteResource> getNoteById(@PathVariable UUID id) {
         final var note = noteService.getNoteById(id);
+        return ResponseEntity.ok(note);
+    }
+
+    @GetMapping("/encrypted/{id}")
+    ResponseEntity<NoteResource> getEncryptedNoteById(
+            @PathVariable UUID id,
+            @RequestBody EncryptedNotePassword encryptedNotePassword
+    ) {
+        final var note = noteService.getEncryptedNoteById(id, encryptedNotePassword);
         return ResponseEntity.ok(note);
     }
 

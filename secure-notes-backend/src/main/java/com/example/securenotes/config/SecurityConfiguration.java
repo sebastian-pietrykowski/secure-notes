@@ -45,8 +45,10 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((request) -> {
                     request
                             .requestMatchers("/api/v1/notes/**").authenticated()
+                            .requestMatchers("/api/v1/notes/encrypted/**").authenticated()
                             .requestMatchers("/api/v1/auth/register").permitAll()
                             .requestMatchers(HttpMethod.POST).authenticated()
+                            .requestMatchers(HttpMethod.GET).authenticated()
                             .anyRequest().denyAll();
                 })
                 .exceptionHandling((exceptionHandling) -> exceptionHandling
