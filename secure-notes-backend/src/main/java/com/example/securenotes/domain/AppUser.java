@@ -19,13 +19,21 @@ import java.util.UUID;
 public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    UUID id;
+    private UUID id;
 
     @Column(nullable = false, unique = true)
-    String email;
+    private String email;
 
     @Column(nullable = false)
-    String password;
+    private String password;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean isAccountLocked = false;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private Integer failedLoginAttempts = 0;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
