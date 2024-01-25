@@ -17,6 +17,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { EncryptedNotePassword } from '../../../core/models/encrypted-note-password';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-show-note',
@@ -44,6 +45,7 @@ export class ShowNoteComponent implements OnInit {
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +55,7 @@ export class ShowNoteComponent implements OnInit {
     note$.subscribe({
       next: (note: NoteResource) => {
         this.note = note;
-      },
+      }
     });
   }
 
@@ -91,6 +93,9 @@ export class ShowNoteComponent implements OnInit {
     decryptedNote$.subscribe({
       next: (note: NoteResource) => {
         this.note = note;
+      },
+      error: (err) => {
+        this.snackBar.open('Invalid password', 'Close');
       }
     })
   }

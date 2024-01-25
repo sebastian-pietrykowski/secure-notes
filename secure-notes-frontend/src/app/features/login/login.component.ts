@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
     const login$ = this.authService.login(user);
     login$.subscribe({
       next: () => {
+        sessionStorage.setItem('logged', 'true');
         sessionStorage.setItem('email', user.email);
         this.redirectAfterLogin();
       },

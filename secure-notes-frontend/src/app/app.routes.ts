@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import {AuthGuard} from "./core/auth/auth-guard";
 
 export const routes: Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,6 +19,7 @@ export const routes: Routes = [
       import('./features/note/note-list/note-list.component').then(
         (c) => c.NoteListComponent,
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'notes/show/:id',
@@ -25,6 +27,7 @@ export const routes: Routes = [
       import('./features/note/show-note/show-note.component').then(
         (c) => c.ShowNoteComponent,
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'notes/create',
@@ -32,6 +35,7 @@ export const routes: Routes = [
       import('./features/note/create-note/create-note.component').then(
         (c) => c.CreateNoteComponent,
       ),
+    canActivate: [AuthGuard],
   },
   // { path: '**', redirectTo: '' },
 ];
