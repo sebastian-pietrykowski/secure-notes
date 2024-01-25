@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import {
   EmailValidator,
   FormBuilder,
@@ -9,32 +11,28 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { NgIf } from '@angular/common';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthService } from '../../core/services/auth.service';
-import { User } from '../../core/models/user';
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from '../../core/models/user';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [
-    MatCardModule,
     MatButtonModule,
-    ReactiveFormsModule,
+    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    NgIf,
+    ReactiveFormsModule,
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
 })
-export class LoginComponent implements OnInit {
-  protected loginForm!: FormGroup;
+export class RegisterComponent {
+  protected registerForm!: FormGroup;
   protected errorMatcher = new ErrorStateMatcher();
 
   constructor(
@@ -45,38 +43,36 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createLoginForm();
+    this.createRegisterForm();
   }
 
-  protected login(): void {
+  protected register(): void {
     const user = new User(
       this.emailFormControl.value,
       this.passwordFormControl.value,
     );
-    const login$ = this.authService.login(user);
-    login$.subscribe({
+    const register$ = this.authService.register(user);
+    register$.subscribe({
       next: () => {
-        sessionStorage.setItem('logged', 'true');
-        sessionStorage.setItem('email', user.email);
-        this.redirectAfterLogin();
+        this.redirectAfterSuccessfulRegister();
       },
       error: (err: HttpErrorResponse) => {
         // console.error(err);
-        this.showLoginFailureMessage();
+        this.showErrorMessage(err.error);
       },
     });
   }
 
   protected get emailFormControl(): FormControl {
-    return this.loginForm.get('email') as FormControl;
+    return this.registerForm.get('email') as FormControl;
   }
 
   protected get passwordFormControl(): FormControl {
-    return this.loginForm.get('password') as FormControl;
+    return this.registerForm.get('password') as FormControl;
   }
 
-  private createLoginForm(): void {
-    this.loginForm = this.formBuilder.group({
+  private createRegisterForm(): void {
+    this.registerForm = this.formBuilder.group({
       email: [
         '',
         [
@@ -88,11 +84,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  private redirectAfterLogin(): void {
-    this.router.navigateByUrl('/notes').then();
+  private redirectAfterSuccessfulRegister(): void {
+    this.router.navigateByUrl('/login').then();
   }
 
-  private showLoginFailureMessage() {
-    this.snackBar.open('Login failure', 'Close');
+  private showErrorMessage(message: string) {
+    this.snackBar.open(message, 'Close');
   }
 }

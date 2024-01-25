@@ -45,8 +45,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((request) -> {
                     request
                             .requestMatchers("/api/v1/notes/**").authenticated()
+                            .requestMatchers("/api/v1/notes/encrypted/**").authenticated()
                             .requestMatchers("/api/v1/auth/register").permitAll()
                             .requestMatchers(HttpMethod.POST).authenticated()
+                            .requestMatchers(HttpMethod.GET).authenticated()
+                            .requestMatchers(HttpMethod.DELETE).authenticated()
                             .anyRequest().denyAll();
                 })
                 .exceptionHandling((exceptionHandling) -> exceptionHandling
@@ -62,8 +65,8 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:4200"));
-        configuration.setAllowedMethods(List.of("GET","POST", "DELETE"));
-        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "DELETE"));
+        configuration.setAllowedHeaders(List.of("content-type", "authorization"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -82,6 +85,11 @@ public class SecurityConfiguration {
     private AuthenticationFailureHandler loginFailureHandler() {
         return (httpServletRequest, httpServletResponse, e) -> {
             System.out.println("Login failed");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
         };
     }

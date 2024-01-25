@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.crypto.spec.IvParameterSpec;
 import java.util.UUID;
 
 @Data
@@ -36,4 +37,6 @@ public class Note {
     private Boolean isEncrypted;
 
     private String password;
+
+    private byte[] iv;
 }

@@ -4,6 +4,7 @@ import { CreateNoteRequest } from '../models/create-note-request';
 import { Observable } from 'rxjs';
 import { NoteResource } from '../models/note-resource';
 import { environment } from '../../../environments/environment';
+import {EncryptedNotePassword} from "../models/encrypted-note-password";
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,11 @@ export class NoteService {
   public getNote(id: string): Observable<NoteResource> {
     const url = `${this.notesUrl}/${id}`;
     return this.httpClient.get<NoteResource>(url, this.options);
+  }
+
+  public getDecryptedNote(id: string, encryptedNotePassword: EncryptedNotePassword): Observable<NoteResource> {
+    const url = `${this.notesUrl}/encrypted/${id}`;
+    return this.httpClient.post<NoteResource>(url, encryptedNotePassword, this.options);
   }
 
   public getNotes(): Observable<NoteResource[]> {

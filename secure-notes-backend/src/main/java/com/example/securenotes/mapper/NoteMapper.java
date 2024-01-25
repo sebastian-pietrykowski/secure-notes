@@ -3,15 +3,12 @@ package com.example.securenotes.mapper;
 import com.example.securenotes.domain.Note;
 import com.example.securenotes.dto.CreateNoteRequest;
 import com.example.securenotes.dto.NoteResource;
-import com.example.securenotes.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
 public class NoteMapper {
-    private final NoteRepository noteRepository;
-
     public NoteResource mapNoteToNoteResource(Note note) {
         return NoteResource.builder()
                 .id(note.getId().toString())
@@ -29,6 +26,16 @@ public class NoteMapper {
                 .creator(createNoteRequest.creator())
                 .isEncrypted(createNoteRequest.isEncrypted())
                 .password(createNoteRequest.password())
+                .build();
+    }
+
+    public NoteResource mapEncryptedNoteToPartialNoteResource(Note note) {
+        return NoteResource.builder()
+                .id(note.getId().toString())
+                .title(note.getTitle())
+                .content(note.getIsEncrypted() ? "Encrypted" : note.getContent())
+                .creator(note.getCreator())
+                .isEncrypted(note.getIsEncrypted())
                 .build();
     }
 }
