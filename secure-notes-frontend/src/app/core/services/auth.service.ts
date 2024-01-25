@@ -42,9 +42,6 @@ export class AuthService {
   }
 
   public isUserLoggedIn(): boolean {
-    if (sessionStorage.getItem('logged') == 'false') {
-      this.logout();
-    }
     return sessionStorage.getItem('logged') === 'true';
   }
 

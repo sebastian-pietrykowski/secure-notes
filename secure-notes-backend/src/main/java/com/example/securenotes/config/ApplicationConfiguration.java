@@ -22,14 +22,14 @@ public class ApplicationConfiguration {
     private static final int MEMORY = 65536;
     private static final int ITERATIONS = 10;
 
-    @Bean
-    public AuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder());
-        provider.setUserDetailsService(userDetailsService());
-
-        return provider;
-    }
+//    @Bean
+//    public AuthenticationProvider daoAuthenticationProvider() {
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//        provider.setPasswordEncoder(passwordEncoder());
+//        provider.setUserDetailsService(userDetailsService());
+//
+//        return provider;
+//    }
 
     @Bean
     public UserDetailsService userDetailsService() {
