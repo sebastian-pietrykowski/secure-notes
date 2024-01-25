@@ -85,6 +85,11 @@ public class SecurityConfiguration {
     private AuthenticationFailureHandler loginFailureHandler() {
         return (httpServletRequest, httpServletResponse, e) -> {
             System.out.println("Login failed");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
         };
     }

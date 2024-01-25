@@ -31,4 +31,12 @@ export class AuthService {
     const url = `${this.authUrl}/register`;
     return this.httpClient.post<void>(url, user);
   }
+
+  public isUserLoggedIn(): boolean {
+    return true;
+  }
+
+  public logout() {
+    // this.isUserLoggedInVar = false;
+  }
 }
