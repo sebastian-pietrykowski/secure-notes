@@ -33,7 +33,7 @@ public class NoteMapper {
         return NoteResource.builder()
                 .id(note.getId().toString())
                 .title(note.getTitle())
-                .content("Encrypted")
+                .content(note.getIsEncrypted() ? "Encrypted" : note.getContent())
                 .creator(note.getCreator())
                 .isEncrypted(note.getIsEncrypted())
                 .build();

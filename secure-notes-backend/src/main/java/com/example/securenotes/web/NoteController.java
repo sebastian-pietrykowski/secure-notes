@@ -1,7 +1,7 @@
 package com.example.securenotes.web;
 
 import com.example.securenotes.dto.CreateNoteRequest;
-import com.example.securenotes.dto.EncryptedNotePassword;
+import com.example.securenotes.dto.EncryptedNotePasswordRequest;
 import com.example.securenotes.dto.NoteResource;
 import com.example.securenotes.service.NoteService;
 import jakarta.validation.Valid;
@@ -34,9 +34,9 @@ public class NoteController {
     @PostMapping("/encrypted/{id}")
     ResponseEntity<NoteResource> getEncryptedNoteById(
             @PathVariable UUID id,
-            @RequestBody EncryptedNotePassword encryptedNotePassword
+            @RequestBody EncryptedNotePasswordRequest encryptedNotePasswordRequest
     ) {
-        final var note = noteService.getEncryptedNoteById(id, encryptedNotePassword);
+        final var note = noteService.getEncryptedNoteById(id, encryptedNotePasswordRequest);
         return ResponseEntity.ok(note);
     }
 

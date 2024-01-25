@@ -69,7 +69,7 @@ export class CreateNoteComponent implements OnInit {
     const createNoteRequest = new CreateNoteRequest(
       this.titleFormControl.value,
       this.contentFormControl.value,
-      'user',
+      sessionStorage.getItem('email') ?? 'unknown user',
       this.isEncryptedFormControl.value === '' ? false : this.isEncryptedFormControl.value,
       this.passwordFormControl.value
     );

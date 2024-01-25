@@ -8,6 +8,11 @@ export const routes: Routes = [
       import('./features/login/login.component').then((c) => c.LoginComponent),
   },
   {
+    path: 'register',
+    loadComponent: () =>
+      import('./features/register/register.component').then((c) => c.RegisterComponent),
+  },
+  {
     path: 'notes',
     loadComponent: () =>
       import('./features/note/note-list/note-list.component').then(

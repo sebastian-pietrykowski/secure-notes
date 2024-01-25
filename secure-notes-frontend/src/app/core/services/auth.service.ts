@@ -26,4 +26,9 @@ export class AuthService {
 
     return this.httpClient.post<void>(url, body.toString(), options);
   }
+
+  public register(user: User): Observable<void> {
+    const url = `${this.authUrl}/register`;
+    return this.httpClient.post<void>(url, user);
+  }
 }

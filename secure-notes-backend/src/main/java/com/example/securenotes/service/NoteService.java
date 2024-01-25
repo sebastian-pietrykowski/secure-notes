@@ -2,7 +2,7 @@ package com.example.securenotes.service;
 
 import com.example.securenotes.domain.Note;
 import com.example.securenotes.dto.CreateNoteRequest;
-import com.example.securenotes.dto.EncryptedNotePassword;
+import com.example.securenotes.dto.EncryptedNotePasswordRequest;
 import com.example.securenotes.dto.NoteResource;
 import com.example.securenotes.mapper.NoteMapper;
 import com.example.securenotes.repository.NoteRepository;
@@ -43,10 +43,10 @@ public class NoteService {
         return noteMapper.mapEncryptedNoteToPartialNoteResource(note);
     }
 
-    public NoteResource getEncryptedNoteById(UUID id, EncryptedNotePassword encryptedNotePassword) {
+    public NoteResource getEncryptedNoteById(UUID id, EncryptedNotePasswordRequest encryptedNotePasswordRequest) {
         final var note = noteRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Note with id " + id + " does not exist"));
-        if (!passwordEncoder.matches(encryptedNotePassword.password(), note.getPassword()))
+        if (!passwordEncoder.matches(encryptedNotePasswordRequest.password(), note.getPassword()))
             throw new IllegalArgumentException("Invalid password");
 
         decipherNoteContent(note);
