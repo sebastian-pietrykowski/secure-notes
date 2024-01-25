@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: secure-notes
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+    networks:
+      - webnet
+  
+  api:
+    build:
+      context: ./secure-notes-backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - webnet
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+
+networks:
+  webnet:
