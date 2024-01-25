@@ -24,6 +24,14 @@ services:
     depends_on:
       - db
 
+  client:
+    build:
+      context: ./secure-notes-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    networks:
+      - webnet
 volumes:
   db-data:
 
