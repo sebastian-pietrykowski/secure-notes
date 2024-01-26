@@ -40,11 +40,11 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./certs:/etc/ssl/certs:ro
-    networks:
-      - webnet
     depends_on:
       - api
       - client
+    networks:
+      - webnet
       
 volumes:
   db-data:
