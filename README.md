@@ -29,7 +29,7 @@ A full-stack appliation for creating and managing securly stored notes. Privacy 
 * Edit a note
 * Delete a note
 
-## Security features
+### Security features
 
 * Communication between the server and client is secured by HTTPS protocol and CORS policy
 * All passwords and encrypted notes' content are stored in encrypted form
