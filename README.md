@@ -56,9 +56,9 @@ A full-stack appliation for creating and managing securly stored notes. Privacy 
 
 ## Security
 
-Before saving password are encrypted using 'Argon2' algorithm. When trying to authenticate is being compared with typed encrypted password.
+Before saving, passwords are encrypted using the 'Argon2' algorithm. When trying to authenticate, the typed password after encryption is compared with saved password.
 
-Secured notes are encrypted while creating and deprycted while receiving using 'AES/CBC/PKCS5Padding' algorithm.
+Secured notes are encrypted while creating and deprycted while receiving using the 'AES/CBC/PKCS5Padding' algorithm.
 
 ## Installation
 1. Clone the repository to your local machine using Git:
