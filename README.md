@@ -108,7 +108,7 @@ Secured notes are encrypted while creating and deprycted while receiving using t
 ### Create a note
 
 <div align="center">
-    <img src="screenshots/create note" alt="Create a note">
+    <img src="screenshots/create note.png" alt="Create a note">
 </div>
 
 ### Unencrypted note details
@@ -120,7 +120,7 @@ Secured notes are encrypted while creating and deprycted while receiving using t
 ### Encrypted note details before decoding
 
 <div align="center">
-    <img src="screenshots/enrcypted note without content.png" alt="Encrypted note without content">
+    <img src="screenshots/encrypted note without content.png" alt="Encrypted note without content">
 </div>
 
 ### Encrypted note after decoding
