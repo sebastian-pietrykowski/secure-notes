@@ -1,6 +1,6 @@
 # Secure Notes App
 
-A full-stack appliation for creating and managing securly stored notes. Privacy and data security are encured by using advanced encryption mechanisms. After logging in, a user can leave a public note or secure it with a password that can be shared between users. This application is created using Java's Spring Boot framework and Angular.
+A full-stack appliation for creating and managing securly stored notes. Privacy and data security are encured by using advanced encryption mechanisms. After logging in, a user can leave a public note or secure it with a password that can be shared between users. Notes can also be styled. This application is created using Java's Spring Boot framework and Angular.
 
 ## Table of Contents
 * [Features](#features)
@@ -11,6 +11,7 @@ A full-stack appliation for creating and managing securly stored notes. Privacy 
   * [Front-end](#front-end)
   * [Infrastructure](#infrastructure)
 * [Security](#security)
+* [Notes styling](#notes-styling)
 * [Installation](#installation)
 * [Screenshots](#screenshots)
 
@@ -59,6 +60,9 @@ A full-stack appliation for creating and managing securly stored notes. Privacy 
 Before saving, passwords are encrypted using the 'Argon2' algorithm. When trying to authenticate, the typed password after encryption is compared with saved password.
 
 Secured notes are encrypted while creating and deprycted while receiving using the 'AES/CBC/PKCS5Padding' algorithm.
+
+## Notes styling
+Notes can be styled using HTML. The most used tags are shown at the cheatsheet at the bottom of the 'Create a note' page. To ensure safety, they are sanitized before showing to client.
 
 ## Installation
 1. Clone the repository to your local machine using Git:
